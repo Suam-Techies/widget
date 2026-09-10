@@ -91,7 +91,7 @@ export default function ChatTab({ messages, onSendMessage, isTyping, suggestedCh
             parsed = parsed.trim().replace(/^[-•]\s+/, '');
           }
 
-          const segments = parsed.split(/(\*{2}[^*]+\*{2}|`[^`]+`)/g);
+          const segments = parsed.split(/(\*{2}[^*]+\*{2}|`[^`]+`|\+\d[\d\s-]{6,}\d)/g);
 
           return (
             <div key={lIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.4rem' }}>
@@ -99,15 +99,15 @@ export default function ChatTab({ messages, onSendMessage, isTyping, suggestedCh
               <div style={{ flex: 1 }}>
                 {segments.map((seg, sIdx) => {
                   if (seg.startsWith('**') && seg.endsWith('**')) {
-                    return <strong key={sIdx} style={{ color: '#ffffff', fontWeight: 600 }}>{seg.slice(2, -2)}</strong>;
+                    return <strong key={sIdx} style={{ color: '#17231b', fontWeight: 700 }}>{seg.slice(2, -2)}</strong>;
                   }
                   if (seg.startsWith('`') && seg.endsWith('`')) {
                     return (
                       <code
                         key={sIdx}
                         style={{
-                          background: '#1f2438',
-                          color: '#6ee7b7',
+                          background: '#e5efe7',
+                          color: '#166534',
                           padding: '0.1rem 0.35rem',
                           borderRadius: '4px',
                           fontSize: '0.74rem'
@@ -115,6 +115,18 @@ export default function ChatTab({ messages, onSendMessage, isTyping, suggestedCh
                       >
                         {seg.slice(1, -1)}
                       </code>
+                    );
+                  }
+                  if (/^\+\d[\d\s-]{6,}\d$/.test(seg)) {
+                    const phoneNumber = seg.replace(/[^\d+]/g, '');
+                    return (
+                      <a
+                        key={sIdx}
+                        href={`tel:${phoneNumber}`}
+                        style={{ color: '#15803d', textDecoration: 'underline', fontWeight: 600 }}
+                      >
+                        {seg}
+                      </a>
                     );
                   }
                   return seg;
@@ -136,7 +148,7 @@ export default function ChatTab({ messages, onSendMessage, isTyping, suggestedCh
             <div className="fo-msg-meta">
               {msg.sender === 'bot' && (
                 <span style={{ color: '#10b981', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', fontWeight: 600 }}>
-                  <SparklesIcon /> FixOnce QA
+                  <SparklesIcon /> Travel Assistant
                 </span>
               )}
               {msg.sender === 'user' && <span>You</span>}
@@ -202,7 +214,7 @@ export default function ChatTab({ messages, onSendMessage, isTyping, suggestedCh
               <span className="fo-dot" />
               <span className="fo-dot" />
             </div>
-            <span>FixOnce QA analyzing...</span>
+            <span>Travel Assistant analyzing...</span>
           </div>
         )}
 
@@ -232,7 +244,7 @@ export default function ChatTab({ messages, onSendMessage, isTyping, suggestedCh
             type="text"
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
-            placeholder="Ask about bug verification, regression tests..."
+            placeholder=""
             className="fo-chat-input"
           />
           <button

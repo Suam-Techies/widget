@@ -24,6 +24,19 @@ const TRAVEL_MENU_REPLIES = [
   '👨‍💼 Talk to a Travel Expert'
 ];
 
+const COUNTRY_PHONE_NUMBERS = {
+  aus: '+611800231285',
+  australia: '+611800231285',
+  usa: '+18334263964',
+  'united states': '+18334263964',
+  uk: '+448081757391',
+  'united kingdom': '+448081757391',
+  chile: '+56800914205',
+  mexico: '+528004610026'
+};
+
+const COUNTRY_REPLIES = ['AUS', 'USA', 'UK', 'CHILE', 'MEXICO'];
+
 export default function FixOnceChatWidget({ openOnMount = false }) {
   const [isOpen, setIsOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
@@ -36,8 +49,7 @@ export default function FixOnceChatWidget({ openOnMount = false }) {
       id: 'msg-welcome',
       sender: 'bot',
       timestamp: 'Just now',
-      text: `💬 **Question 1**
-
+      text: `
     What do you need help with today?`,
       quickReplies: TRAVEL_MENU_REPLIES
     }
@@ -128,47 +140,68 @@ export default function FixOnceChatWidget({ openOnMount = false }) {
       const lower = userText.toLowerCase();
 
       let matchedAnswer = null;
-      if (lower.includes('book a flight') || lower.includes('book flight')) {
+      const selectedCountry = Object.keys(COUNTRY_PHONE_NUMBERS).find(country =>
+        lower.trim() === country
+      );
+
+      if (selectedCountry) {
+        matchedAnswer = {
+          response: `📞 **${selectedCountry.toUpperCase()} support number:** ${COUNTRY_PHONE_NUMBERS[selectedCountry]}`,
+          quickReplies: COUNTRY_REPLIES
+        };
+      } else if (lower.includes('book a flight') || lower.includes('book flight')) {
         matchedAnswer = {
           response: `✈️ **Let's book your flight.**
 
-Please share your departure city, destination, travel dates, and the number of passengers.`,
+Please share your departure city, destination, travel dates, and the number of passengers.
+
+Would you like to connect with a representative?`,
           quickReplies: TRAVEL_ASSISTANCE_REPLIES
         };
       } else if (lower.includes('change') || lower.includes('cancel')) {
         matchedAnswer = {
           response: `🔄 **I can help with your booking change or cancellation.**
 
-Please provide your reservation number and tell me what you would like to change.`,
+Please provide your reservation number and tell me what you would like to change.
+
+Would you like to connect with a representative?`,
           quickReplies: TRAVEL_ASSISTANCE_REPLIES
         };
       } else if (lower.includes('check reservation') || lower.includes('reservation')) {
         matchedAnswer = {
           response: `📋 **Let's check your reservation.**
 
-Please enter your confirmation number and the last name on the booking.`,
+Please enter your confirmation number and the last name on the booking.
+
+Would you like to connect with a representative?`,
           quickReplies: TRAVEL_ASSISTANCE_REPLIES
         };
       } else if (lower.includes('better fare') || lower.includes('better price')) {
         matchedAnswer = {
           response: `💰 **I'll help you find a better fare.**
 
-Share your current itinerary or reservation number and I’ll look for available options.`,
+Share your current itinerary or reservation number and I’ll look for available options.
+
+Would you like to connect with a representative?`,
           quickReplies: TRAVEL_ASSISTANCE_REPLIES
         };
       } else if (lower.includes('yes, call me') || lower.includes('yes call me')) {
         matchedAnswer = {
-          response: `📞 **We’ll have a travel expert call you.**
+          response: `📞 **Contact us on the numbers below:**
 
-Please share the best phone number and a convenient time to reach you.`,
-          quickReplies: ['💬 Continue Chat']
+ - **AUS:** ${COUNTRY_PHONE_NUMBERS.aus}
+ - **USA:** ${COUNTRY_PHONE_NUMBERS.usa}
+ - **UK:** ${COUNTRY_PHONE_NUMBERS.uk}
+ - **CHILE:** ${COUNTRY_PHONE_NUMBERS.chile}
+ - **MEXICO:** ${COUNTRY_PHONE_NUMBERS.mexico}`,
+          quickReplies: COUNTRY_REPLIES
         };
       } else if (lower.includes('travel expert')) {
         matchedAnswer = {
           response: `👨‍💼 **A travel expert can help you faster by phone.**
 
-Would you like us to call you, or would you prefer to continue chatting here?`,
-          quickReplies: TRAVEL_ASSISTANCE_REPLIES
+Please select your country to get the right support number.`,
+          quickReplies: COUNTRY_REPLIES
         };
       } else if (lower.includes('continue chat')) {
         matchedAnswer = {

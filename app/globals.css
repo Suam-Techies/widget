@@ -1,15 +1,15 @@
 /* ==========================================================================
-   FixOnce QA & Tawk.to-Style Chatbot Widget Design System
-   Pure Vanilla CSS - Modern Dark Mode, Smooth Glassmorphism & Animations
+  Travel Assistant Widget Design System
+  Pure Vanilla CSS - Clean Light Mode & Smooth Animations
    ========================================================================== */
 
 :root {
-  --fo-bg-dark: #06110c;
-  --fo-bg-surface: #0b1711;
-  --fo-bg-card: #10231a;
-  --fo-bg-card-hover: #153022;
-  --fo-border: rgba(255, 255, 255, 0.08);
-  --fo-border-subtle: rgba(255, 255, 255, 0.05);
+  --fo-bg-dark: #f4f7f6;
+  --fo-bg-surface: #ffffff;
+  --fo-bg-card: #f8faf9;
+  --fo-bg-card-hover: #eef8f1;
+  --fo-border: #dce5df;
+  --fo-border-subtle: #e8eeea;
   --fo-border-active: rgba(34, 197, 94, 0.6);
 
   --fo-primary: #22c55e;
@@ -17,17 +17,17 @@
   --fo-primary-gradient: linear-gradient(135deg, #15803d 0%, #16a34a 50%, #22c55e 100%);
   --fo-primary-glow: rgba(34, 197, 94, 0.35);
 
-  --fo-text-main: #f3f4f6;
-  --fo-text-muted: #9ca3af;
-  --fo-text-dim: #6b7280;
-  --fo-code-bg: #0b0d14;
+  --fo-text-main: #17231b;
+  --fo-text-muted: #64748b;
+  --fo-text-dim: #84918a;
+  --fo-code-bg: #f1f5f2;
 
   --fo-radius-sm: 8px;
   --fo-radius-md: 12px;
   --fo-radius-lg: 18px;
   --fo-radius-full: 9999px;
 
-  --fo-shadow-modal: 0 20px 45px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --fo-shadow-modal: 0 20px 45px -10px rgba(35, 55, 43, 0.24), 0 0 0 1px rgba(35, 55, 43, 0.06);
   --fo-shadow-btn: 0 8px 24px -4px rgba(16, 185, 129, 0.4);
 }
 
@@ -40,7 +40,7 @@
 body {
   background-color: var(--fo-bg-dark);
   color: var(--fo-text-main);
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -1183,4 +1183,147 @@ body:has(.fo-widget-only-page) {
 @keyframes foBounce {
   0%, 80%, 100% { transform: translateY(0); }
   40% { transform: translateY(-5px); }
+}
+
+/* Light widget surfaces */
+.fo-widget-teaser,
+.fo-chat-window {
+  background: #ffffff;
+  border-color: var(--fo-border);
+  box-shadow: 0 16px 36px rgba(35, 55, 43, 0.18);
+}
+
+.fo-teaser-text h5,
+.fo-header-titles h3 {
+  color: #17231b;
+}
+
+.fo-teaser-text p,
+.fo-header-titles p,
+.fo-msg-meta {
+  color: #64748b;
+}
+
+.fo-chat-header {
+  background: #ffffff;
+  border-color: var(--fo-border);
+}
+
+.fo-avatar-wrap {
+  box-shadow: 0 4px 10px rgba(35, 55, 43, 0.16);
+}
+
+.fo-avatar-wrap .fo-online-indicator {
+  border-color: #ffffff;
+}
+
+.fo-icon-btn {
+  color: #64748b;
+}
+
+.fo-icon-btn:hover {
+  background: #eef4ef;
+  color: #17231b;
+}
+
+.fo-tab-bar,
+.fo-prompt-strip,
+.fo-chat-input-bar {
+  background: #f8faf9;
+  border-color: var(--fo-border);
+}
+
+.fo-tab-nav-btn {
+  color: #84918a;
+}
+
+.fo-tab-nav-btn:hover {
+  color: #334155;
+  background: #eef4ef;
+}
+
+.fo-chat-view,
+.fo-help-view,
+.fo-diag-view,
+.fo-embed-view {
+  background: #ffffff;
+}
+
+.fo-msg-row.user .fo-msg-bubble {
+  color: #ffffff;
+}
+
+.fo-msg-row.bot .fo-msg-bubble {
+  background: #f1f5f2;
+  border-color: var(--fo-border);
+  color: #334155;
+}
+
+.fo-typing-pill {
+  background: #f1f5f2;
+  border-color: var(--fo-border);
+  color: #64748b;
+}
+
+.fo-reply-chip,
+.fo-prompt-item,
+.fo-cat-chip {
+  background: #f0f8f2;
+  border-color: #b9dec2;
+  color: #16803a;
+}
+
+.fo-reply-chip:hover,
+.fo-prompt-item:hover {
+  background: #e1f3e5;
+  color: #11652d;
+}
+
+.fo-input-field-wrap,
+.fo-search-box,
+.fo-diag-box,
+.fo-article-card,
+.fo-form-input,
+.fo-form-textarea {
+  background: #ffffff;
+  border-color: var(--fo-border);
+}
+
+.fo-chat-input,
+.fo-search-box input,
+.fo-form-input,
+.fo-form-textarea {
+  color: #17231b;
+}
+
+.fo-chat-input::placeholder,
+.fo-search-box input::placeholder {
+  color: #94a39a;
+}
+
+.fo-article-title,
+.fo-preset-title {
+  color: #17231b;
+}
+
+.fo-article-summary,
+.fo-article-body,
+.fo-preset-desc,
+.fo-form-label {
+  color: #64748b;
+}
+
+.fo-article-body {
+  background: #f8faf9;
+  border-color: var(--fo-border);
+}
+
+.fo-code-block,
+.fo-code-header {
+  background: #eef3ef;
+  border-color: var(--fo-border);
+}
+
+.fo-code-body {
+  color: #166534;
 }
