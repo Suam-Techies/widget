@@ -16,6 +16,16 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Add the travel widget to any website
+
+After deploying this project, add the following script before the closing `</body>` tag on another website. Replace the example domain with your deployed domain:
+
+```html
+<script async src="https://your-domain.com/fixonce-widget.js"></script>
+```
+
+The script creates the floating travel assistance widget and loads it from `/` in an isolated iframe.
+
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
