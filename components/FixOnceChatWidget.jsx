@@ -27,8 +27,8 @@ const TRAVEL_MENU_REPLIES = [
 const COUNTRY_PHONE_NUMBERS = {
   aus: '+611800231285',
   australia: '+611800231285',
-  usa: '+18334263964',
-  'united states': '+18334263964',
+  usa: '+18664368404',
+  'united states': '+18664368404',
   uk: '+448081757391',
   'united kingdom': '+448081757391',
   chile: '+56800914205',
